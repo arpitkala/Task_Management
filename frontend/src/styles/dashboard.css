@@ -1,0 +1,66 @@
+/* ── Dashboard ── */
+.dashboard { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ── KPI Grid ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+}
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.25rem;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.kpi-wide { grid-column: span 2; }
+.kpi-value { font-family: var(--font-display); font-size: 2rem; font-weight: 700; line-height: 1; }
+.kpi-label { font-size: 0.75rem; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── Dash cards ── */
+.dash-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+.dash-card-title {
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+/* ── Progress ── */
+.big-progress-track {
+  height: 10px; background: var(--surface3);
+  border-radius: 999px; overflow: hidden; margin-bottom: 0.5rem;
+}
+.big-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  border-radius: 999px; transition: width 0.6s ease;
+}
+.progress-labels {
+  display: flex; justify-content: space-between;
+  font-size: 0.75rem; color: var(--text-2);
+}
+
+/* ── Chart grid ── */
+.chart-grid-2 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+@media (max-width: 860px) { .chart-grid-2 { grid-template-columns: 1fr; } }
+
+/* ── Overdue table ── */
+.overdue-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.overdue-table th {
+  text-align: left; padding: 6px 10px;
+  color: var(--text-2); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+.overdue-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text); }
+.overdue-table tr:last-child td { border-bottom: none; }
+.overdue-table tr:hover td { background: var(--surface2); }
