@@ -32,7 +32,9 @@ taskflow-v3/
 │   │       ├── tasks.css              ← Task list & row styles
 │   │       └── dashboard.css         ← KPI cards, charts, table styles
 │   └── package.json
+└── .gitignore
 └── README.md
+
 ```
 
 ---
@@ -56,40 +58,6 @@ cd frontend
 npm install
 npm start         # → http://localhost:3000
 ```
-
-> The CRA proxy forwards `/tasks` API calls to `http://localhost:4000` automatically.
-
----
-
-## API Reference
-
-| Method | Endpoint          | Description                       | Body / Query                                              |
-|--------|-------------------|-----------------------------------|-----------------------------------------------------------|
-| GET    | /tasks            | Get all tasks                     | `?status=active\|completed&label=&type=&priority=`        |
-| GET    | /tasks/stats      | Dashboard analytics data          | —                                                         |
-| POST   | /tasks            | Create a task                     | `{ title, priority, label, type, recurrence, dueDate, reminder, notes }` |
-| PATCH  | /tasks/reorder    | Bulk reorder                      | `{ orderedIds: string[] }`                                |
-| PATCH  | /tasks/:id        | Update any fields                 | Any subset of task fields                                 |
-| DELETE | /tasks/:id        | Delete a task                     | —                                                         |
-
----
-
-## Task Data Model
-
-| Field       | Type    | Values / Notes                                     |
-|-------------|---------|-----------------------------------------------------|
-| id          | string  | UUID (auto)                                         |
-| title       | string  | Required                                            |
-| completed   | boolean | Default: false                                      |
-| priority    | string  | `high` \| `medium` \| `low`                        |
-| label       | string  | `personal` \| `work` \| `shopping` \| `health`     |
-| type        | string  | `task` \| `reminder` \| `event`                    |
-| recurrence  | string  | `none` \| `daily` \| `weekly` \| `monthly`         |
-| dueDate     | string  | ISO date string (optional)                          |
-| reminder    | string  | ISO datetime string (optional)                      |
-| notes       | string  | Extra details (optional)                            |
-| order       | number  | Manual sort index                                   |
-| createdAt   | string  | ISO datetime (auto)                                 |
 
 ---
 
@@ -135,21 +103,3 @@ npm start         # → http://localhost:3000
 - Overdue tasks table
 
 ---
-
-## Design
-
-- Dark theme with slate/indigo/amber palette
-- **Syne** display font + **Instrument Sans** body font
-- Fixed sidebar navigation with live badges
-- Animated modal form (slide-up)
-- CSS variables for full theming consistency
-
----
-
-## Assumptions & Trade-offs
-
-- **In-memory storage** — tasks reset on server restart. To persist: replace `let tasks = []` with a JSON file read/write or SQLite (e.g. `better-sqlite3`).
-- **No auth** — out of scope.
-- **Recurrence** — handled server-side: completing a recurring task creates a clone with the next due date.
-- **Drag & drop** — uses native HTML5 Drag and Drop API (no extra library needed).
-- **Charts** — powered by Chart.js via `react-chartjs-2`.
